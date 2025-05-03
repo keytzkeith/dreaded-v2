@@ -1,3 +1,5 @@
+
+const baz = 'a'
 const {
   default: dreadedConnect,
   useMultiFileAuthState,
