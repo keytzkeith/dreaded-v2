@@ -28,7 +28,7 @@ const _ = require("lodash");
 const PhoneNumber = require("awesome-phonenumber");
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif');
  const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/botFunctions');
-const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }) });
+// const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }) });
 
 const authenticationn = require('../Auth/auth.js');
 const { smsg } = require('../Handler/smsg');
@@ -59,38 +59,34 @@ let settingss = await getSettings();
 const { autobio, mode, anticall } = settingss;
 
 
-        const {  saveCreds, state } = await useMultiFileAuthState(sessionName)
-            const client = dreadedConnect({
-        logger: pino({ level: 'silent' }),
-        printQRInTerminal: true,
-version: [2, 3000, 1015901307],
-        browser: [`DREADED`,'Safari','3.0'],
-fireInitQueries: false,
-            shouldSyncHistoryMessage: false,
-            downloadHistory: false,
-            syncFullHistory: false,
-            generateHighQualityLinkPreview: true,
-            markOnlineOnConnect: true,
-            keepAliveIntervalMs: 30_000,
-        auth: state,
-        getMessage: async (key) => {
-            if (store) {
-                const mssg = await store.loadMessage(key.remoteJid, key.id)
-                return mssg.message || undefined
-            }
-            return {
-                conversation: "HERE"
-            }
+        const { saveCreds, state } = await useMultiFileAuthState(sessionName)
+const client = dreadedConnect({
+    logger: pino({ level: 'silent' }),
+    printQRInTerminal: true,
+    version: [2, 3000, 1015901307],
+    browser: ['DREADED', 'Safari', '3.0'],
+    fireInitQueries: false,
+    shouldSyncHistoryMessage: false,
+    downloadHistory: false,
+    syncFullHistory: false,
+    generateHighQualityLinkPreview: true,
+    markOnlineOnConnect: true,
+    keepAliveIntervalMs: 30_000,
+    auth: state,
+    getMessage: async (key) => {
+        return {
+            conversation: "HERE"
         }
-    })
+    }
+})
 
 
-  store.bind(client.ev);
+  // store.bind(client.ev);
 
 
 
 
-        setInterval(() => { store.writeToFile("store.json"); }, 3000);
+       /* setInterval(() => { store.writeToFile("store.json"); }, 3000); */
 
 if (autobio){ 
             setInterval(() => { 
