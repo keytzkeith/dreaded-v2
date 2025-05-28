@@ -63,7 +63,7 @@ const { autobio, mode, anticall } = settingss;
 const client = dreadedConnect({
     logger: pino({ level: 'silent' }),
     printQRInTerminal: true,
-    version: [2, 3000, 1015901307],
+    version: [2, 3000, 1023223821],
     browser: ['DREADED', 'Safari', '3.0'],
     fireInitQueries: false,
     shouldSyncHistoryMessage: false,
