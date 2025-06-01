@@ -8,7 +8,7 @@ const {
 const { database, botname } = require("../Env/settings");
 
 
-const { getSettings, addSudoUser } = require("../Database/adapter");
+const { getSettings, addSudoUser, getSudoUsers } = require("../Database/adapter");
 
 const { commands, totalCommands } = require("../Handler/commandHandler");
 
