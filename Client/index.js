@@ -88,20 +88,7 @@ const client = dreadedConnect({
 
        /* setInterval(() => { store.writeToFile("store.json"); }, 3000); */
 
-if (autobio){ 
-            setInterval(() => { 
 
-                                 const date = new Date() 
-
-                         client.updateProfileStatus( 
-
-                                         `${botname} is active 24/7\n\n${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}.` 
-
-                                 ) 
-
-                         }, 10 * 1000) 
-
-}
 
  
 const processedCalls = new Set();
