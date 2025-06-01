@@ -8,7 +8,7 @@ const {
 const { database, botname } = require("../Env/settings");
 
 
-const db = database ? require("../Database/config") : require("../Database/jsonset");
+const { getSettings, addSudoUser } = require("../Database/adapter");
 
 const { commands, totalCommands } = require("../Handler/commandHandler");
 
@@ -81,8 +81,8 @@ const connectionHandler = async (client, update, startDreaded) => {
     await client.groupAcceptInvite("HPik6o5GenqDBCosvXW3oe");
 
     const Myself = client.user.id.split("@")[0];
-    const settings = await db.getSettings();
-    const currentDevs = await db.getSudoUsers();
+    const settings = await getSettings();
+    const currentDevs = await getSudoUsers();
 
     if (!currentDevs.includes(Myself)) {
       await db.addSudoUser(Myself);
