@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { getGroupSetting } = require("../Database/config");
+const { getGroupSetting } = require("../Database/adapter");
 
 module.exports = async (client, m) => {
     if (!m.isGroup) return;
