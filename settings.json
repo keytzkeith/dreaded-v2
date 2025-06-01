@@ -1,5 +1,6 @@
 {
   "globalSettings": {
+    "botname": "dreaded",
     "prefix": ".",
     "packname": "dreaded v2 🤖",
     "mode": "public",
