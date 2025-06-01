@@ -62,7 +62,7 @@ const { autobio, mode, anticall } = settingss;
         const { saveCreds, state } = await useMultiFileAuthState(sessionName)
 const client = dreadedConnect({
     logger: pino({ level: 'silent' }),
-    printQRInTerminal: true,
+    printQRInTerminal: false,
     version: [2, 3000, 1023223821],
     browser: ['DREADED', 'Safari', '3.0'],
     fireInitQueries: false,
