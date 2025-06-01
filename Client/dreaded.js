@@ -100,8 +100,16 @@ const sender = m.sender;
 
     const groupMetadata = m.isGroup ? await client.groupMetadata(m.chat).catch((e) => { }) : "";  
     const groupName = m.isGroup && groupMetadata ? await groupMetadata.subject : "";  
-    const participants = m.isGroup && groupMetadata ? await groupMetadata.participants : "";  
-    const groupAdmin = m.isGroup ? await getGroupAdmins(participants) : "";  
+    const participants = m.isGroup && groupMetadata
+  ? groupMetadata.participants
+      .filter(p => p.pn)
+      .map(p => p.pn)
+  : [];
+    const groupAdmin = m.isGroup
+  ? groupMetadata.participants
+      .filter(p => p.admin && p.pn)
+      .map(p => p.pn)
+  : [];
     const isBotAdmin = m.isGroup ? groupAdmin.includes(botNumber) : false; 
 
 /* const isAdmin = groupMetadata.participants.some(p => p.id === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
