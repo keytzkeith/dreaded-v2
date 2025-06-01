@@ -27,8 +27,23 @@ const _ = require("lodash");
 const PhoneNumber = require("awesome-phonenumber");
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif');
  const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/botFunctions');
+
+const logger = pino({
+    level: 'silent' 
+});
+
 const makeInMemoryStore = require('../Client/store.js'); 
- const store = makeInMemoryStore({ logger: pino().child({ level: "silent", stream: "store" }) });
+ 
+
+const store = makeInMemoryStore({
+    logger: logger.child({
+        stream: 'store'
+    })
+});
+
+
+
+
 
 const authenticationn = require('../Auth/auth.js');
 const { smsg } = require('../Handler/smsg');
