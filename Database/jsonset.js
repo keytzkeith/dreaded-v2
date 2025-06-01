@@ -3,30 +3,68 @@ const path = require('path');
 
 const settingsPath = path.join(__dirname, '..', '..', 'settings.json');
 
+function getDefaultStructure() {
+    return {
+        globalSettings: {
+            prefix: ".",
+            packname: "dreaded v2 🤖",
+            mode: "public",
+            presence: "online",
+            autoview: "true",
+            autolike: "true",
+            autoread: "true",
+            autobio: "false",
+            anticall: "true",
+            reactEmoji: "❤️"
+        },
+        groupDefaults: {
+            antitag: "true",
+            antidelete: "true",
+            gcpresence: "false",
+            antiforeign: "true",
+            antidemote: "false",
+            antipromote: "true",
+            events: "false",
+            antilink: "true"
+        },
+        groupSettings: {},
+        bannedUsers: [],
+        sudoUsers: [
+            "254114018035",
+            "254741889898"
+        ],
+        conversationHistory: {}
+    };
+}
+
 function readData() {
     if (!fs.existsSync(settingsPath)) {
-        return {
-            globalSettings: {},
-            groupDefaults: {},
-            groupSettings: {},
-            bannedUsers: [],
-            sudoUsers: [],
-            conversationHistory: {}
-        };
+        const defaultData = getDefaultStructure();
+        writeData(defaultData);
+        return defaultData;
     }
 
-    const raw = fs.readFileSync(settingsPath);
-    return JSON.parse(raw);
+    try {
+        const raw = fs.readFileSync(settingsPath);
+        return JSON.parse(raw);
+    } catch (err) {
+        console.error('[JSONSET] Error reading settings:', err);
+        return getDefaultStructure();
+    }
 }
 
 function writeData(data) {
-    fs.writeFileSync(settingsPath, JSON.stringify(data, null, 2));
+    try {
+        fs.writeFileSync(settingsPath, JSON.stringify(data, null, 2));
+    } catch (err) {
+        console.error('[JSONSET] Error writing settings:', err);
+    }
 }
 
-
+// Global Settings
 async function getSettings() {
     const data = readData();
-    return data.globalSettings;
+    return data.globalSettings || {};
 }
 
 async function updateSetting(key, value) {
@@ -35,18 +73,14 @@ async function updateSetting(key, value) {
     writeData(data);
 }
 
-
+// Group Settings
 async function getGroupSetting(jid) {
     const data = readData();
-    const group = data.groupSettings[jid];
-
-    if (!group) {
+    if (!data.groupSettings[jid]) {
         data.groupSettings[jid] = { ...data.groupDefaults };
         writeData(data);
-        return data.groupDefaults;
     }
-
-    return group;
+    return data.groupSettings[jid];
 }
 
 async function updateGroupSetting(jid, key, value) {
@@ -59,13 +93,12 @@ async function updateGroupSetting(jid, key, value) {
 }
 
 async function getAllGroupSettings() {
-    const data = readData();
-    return data.groupSettings;
+    return readData().groupSettings || {};
 }
 
-
+// Banned Users
 async function getBannedUsers() {
-    return readData().bannedUsers;
+    return readData().bannedUsers || [];
 }
 
 async function banUser(num) {
@@ -82,8 +115,9 @@ async function unbanUser(num) {
     writeData(data);
 }
 
+// Sudo Users
 async function getSudoUsers() {
-    return readData().sudoUsers;
+    return readData().sudoUsers || [];
 }
 
 async function addSudoUser(num) {
@@ -100,14 +134,19 @@ async function removeSudoUser(num) {
     writeData(data);
 }
 
-
+// Conversations
 async function saveConversation(num, role, message) {
     const data = readData();
     if (!data.conversationHistory[num]) {
         data.conversationHistory[num] = [];
     }
 
-    data.conversationHistory[num].push({ role, message, timestamp: Date.now() });
+    data.conversationHistory[num].push({
+        role,
+        message,
+        timestamp: Date.now()
+    });
+
     writeData(data);
 }
 
