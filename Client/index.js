@@ -224,8 +224,8 @@ client.ev.on("messages.upsert", async (chatUpdate) => {
         // handle commands
         if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
 
-        m = smsg(client, mek);
-        require("./dreaded")(client, m, chatUpdate);
+        m = smsg(client, mek, store);
+        require("./dreaded")(client, m, chatUpdate, store);
     } catch (err) {
         console.log(err);
     }
