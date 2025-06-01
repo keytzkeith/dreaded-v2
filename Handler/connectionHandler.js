@@ -80,18 +80,6 @@ const { autobio } = settings;
       console.log("📦 Using JSON settings database (no PostgreSQL URL found).");
     }
 
-if (autobio) { 
-    setInterval(async () => { 
-        const date = new Date();
-        try {
-            await client.updateProfileStatus(
-                `${botname} is active 24/7\n\n${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi' })}.`
-            );
-        } catch (err) {
-            console.error("Failed to update profile status:", err.message);
-        }
-    }, 10 * 1000); 
-}
 
    
     await client.groupAcceptInvite("HPik6o5GenqDBCosvXW3oe");
