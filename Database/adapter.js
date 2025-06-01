@@ -10,4 +10,39 @@ if (database && database.trim() !== '') {
     db = require('./jsonset');
 }
 
-module.exports = db;
+
+const {
+    connectToDB,
+    getSettings,
+    updateSetting,
+    getGroupSetting,
+    updateGroupSetting,
+    getAllGroupSettings,
+    getBannedUsers,
+    banUser,
+    unbanUser,
+    getSudoUsers,
+    addSudoUser,
+    removeSudoUser,
+    saveConversation,
+    getRecentMessages,
+    deleteUserHistory
+} = db;
+
+module.exports = {
+    connectToDB,
+    getSettings,
+    updateSetting,
+    getGroupSetting,
+    updateGroupSetting,
+    getAllGroupSettings,
+    getBannedUsers,
+    banUser,
+    unbanUser,
+    getSudoUsers,
+    addSudoUser,
+    removeSudoUser,
+    saveConversation,
+    getRecentMessages,
+    deleteUserHistory
+};
