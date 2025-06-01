@@ -124,7 +124,7 @@ const sender = m.sender;
 
     const context = {  
         client, m, text, Owner, chatUpdate, store, isBotAdmin, isAdmin, IsGroup, participants,  
-        pushname, body, budy, totalCommands, args, mime, qmsg, msgDreaded, botNumber, itsMe,  
+        pushname, body, budy, totalCommands, args, mime, qmsg, botNumber, itsMe,  
         packname, generateProfilePicture, groupMetadata, dreadedspeed, mycode,  
         fetchJson, exec, getRandom, UploadFileUgu, TelegraPh, prefix, cmd, botname, mode, gcpresence, antitag, antidelete, fetchBuffer, store, uploadtoimgur, chatUpdate, getGroupAdmins, pict, Tag  
     };  
