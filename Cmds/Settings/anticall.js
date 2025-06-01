@@ -1,6 +1,6 @@
 const { database } = require('../../Env/settings');
 
-const db = database ? require('../../Database/config') : require('../../Database/jsonset');
+const { getSettings, updateSetting } = require('../../Database/adapter');
 const ownerMiddleware = require('../../utility/botUtil/Ownermiddleware');
 
 module.exports = async (context) => {
@@ -8,7 +8,7 @@ module.exports = async (context) => {
         const { m, args } = context;
         const value = args[0]?.toLowerCase();
 
-        let settings = await db.getSettings();
+        let settings = await getSettings();
         const prefix = settings.prefix;
         let isEnabled = settings.anticall === true;
 
