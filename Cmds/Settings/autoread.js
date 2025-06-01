@@ -1,4 +1,5 @@
-const { getSettings, updateSetting } = require('../../Database/config');
+const { getSettings, updateSetting } = require('../../Database/adapter');
+
 const ownerMiddleware = require('../../utility/botUtil/Ownermiddleware');
 
 module.exports = async (context) => {
