@@ -133,7 +133,7 @@ const groupSender = m.isGroup && groupMetadata
         client, m, text, Owner, chatUpdate, store, isBotAdmin, isAdmin, IsGroup, participants,  
         pushname, body, budy, totalCommands, args, mime, qmsg, botNumber, itsMe,  
         packname, generateProfilePicture, groupMetadata, dreadedspeed, mycode,  
-        fetchJson, exec, getRandom, UploadFileUgu, TelegraPh, prefix, cmd, botname, mode, gcpresence, antitag, antidelete, fetchBuffer, store, uploadtoimgur, chatUpdate, getGroupAdmins, pict, Tag  
+        fetchJson, exec, getRandom, UploadFileUgu, TelegraPh, prefix, cmd, botname, mode, gcpresence, antitag, antidelete, fetchBuffer, store, uploadtoimgur, groupSender, chatUpdate, getGroupAdmins, pict, Tag  
     };  
 
 
