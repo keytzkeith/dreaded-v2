@@ -32,7 +32,7 @@ const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib
 
 const authenticationn = require('../Auth/auth.js');
 const { smsg } = require('../Handler/smsg');
-const { getSettings, getBannedUsers, banUser, getGroupSetting } = require("../Database/config");
+const { getSettings, getBannedUsers, banUser, getGroupSetting } = require("../Database/adapter");
 
 
 const { botname  } = require('../Env/settings');
