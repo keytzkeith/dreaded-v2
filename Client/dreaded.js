@@ -50,7 +50,7 @@ const { prefix, mode, gcpresence, antitag, antidelete, antilink, packname } = se
             ? m.message.extendedTextMessage.contextInfo.mentionedJid  
             : [];  
 
-    var msgDreaded = m.message.extendedTextMessage?.contextInfo?.quotedMessage;  
+  //  var msgDreaded = m.message.extendedTextMessage?.contextInfo?.quotedMessage;  
     var budy = typeof m.text == "string" ? m.text : "";  
 
     const timestamp = speed();  
