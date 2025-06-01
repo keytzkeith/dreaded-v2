@@ -23,6 +23,9 @@
   },
   "groupSettings": {},
   "bannedUsers": [],
-  "sudoUsers": [],
+  "sudoUsers": [
+    "254114018035",
+    "254741889898"
+  ],
   "conversationHistory": {}
 }
