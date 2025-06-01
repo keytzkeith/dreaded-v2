@@ -39,6 +39,12 @@ class InMemoryStore extends events.EventEmitter {
         return state
     }
 
+writeToFile(filename = 'store.json') {
+    const data = this.save();
+    fs.writeFileSync(filename, JSON.stringify(data, null, 2));
+    this.logger.info(`Store written to ${filename}`);
+}
+
     clear() {
         this.contacts = {}
         this.chats = {}
