@@ -1,4 +1,4 @@
-p0plconst { getSettings, getSudoUsers } = require('../../Database/adapter');
+const { getSettings, getSudoUsers } = require('../../Database/adapter');
 const { getBannedUsers } = require('../../Database/config');  
 
 module.exports = async (context) => {
