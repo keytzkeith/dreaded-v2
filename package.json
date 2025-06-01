@@ -48,7 +48,7 @@
     "crypto": "^1.0.1",
         "file-type": "16.5.3",
     "figlet": "^1.5.2",
-     
+        "events": "^3.3.0",
   
     "link-preview-js": "^3.0.4",
     "fluent-ffmpeg": "^2.1.2",
