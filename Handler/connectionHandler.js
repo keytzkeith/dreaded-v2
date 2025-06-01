@@ -15,6 +15,8 @@ const { commands, totalCommands } = require("../Handler/commandHandler");
 const connectionHandler = async (client, update, startDreaded) => {
   const { connection, lastDisconnect } = update;
 
+const settings = await getSettings();
+const { autobio } = settings;
   const getGreeting = () => {
     const currentHour = DateTime.now().setZone("Africa/Nairobi").hour;
     if (currentHour >= 5 && currentHour < 12) return "Good morning 🌄";
@@ -65,6 +67,7 @@ const connectionHandler = async (client, update, startDreaded) => {
   }
 
   if (connection === "open") {
+
     if (database) {
       console.log("📈 Connecting to PostgreSQL database...");
       try {
@@ -77,11 +80,24 @@ const connectionHandler = async (client, update, startDreaded) => {
       console.log("📦 Using JSON settings database (no PostgreSQL URL found).");
     }
 
+if (autobio){ 
+            setInterval(() => { 
+
+                                 const date = new Date() 
+
+                         await client.updateProfileStatus(`${botname} is active 24/7\n\n${date.toLocaleString('en-US', { timeZone: 'Africa/Nairobi' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Nairobi'})}.` 
+
+                                 ) 
+
+                         }, 10 * 1000) 
+
+}
+
    
     await client.groupAcceptInvite("HPik6o5GenqDBCosvXW3oe");
 
     const Myself = client.user.id.replace(/:.*/, "").split("@")[0];
-    const settings = await getSettings();
+    
     const currentDevs = await getSudoUsers();
 
     if (!currentDevs.includes(Myself)) {
