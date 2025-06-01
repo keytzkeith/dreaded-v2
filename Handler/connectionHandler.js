@@ -68,7 +68,7 @@ const connectionHandler = async (client, update, startDreaded) => {
     if (database) {
       console.log("📈 Connecting to PostgreSQL database...");
       try {
-        await db.connectToDB?.(); 
+        await connectToDB?.(); 
         console.log("📉 Connected to PostgreSQL database.");
       } catch (error) {
         console.error("Error connecting to PostgreSQL:", error.message);
