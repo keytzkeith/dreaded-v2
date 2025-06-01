@@ -118,10 +118,12 @@ const sender = m.sender;
 
 const groupSender = m.isGroup && groupMetadata
   ? (() => {
-      const found = groupMetadata.participants.find(p => p.id === m.sender || p.id === client.decodeJid(m.sender));
-      return found?.pn ? found.pn + '@s.whatsapp.net' : m.sender;
+      const found = groupMetadata.participants.find(p => 
+        p.id === sender || conn.decodeJid(p.id) === conn.decodeJid(sender)
+      );
+      return found?.pn || sender;
     })()
-  : m.sender;
+  : sender;
 
 
      const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
