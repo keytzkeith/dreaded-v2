@@ -2,7 +2,6 @@ const ownerMiddleware = require('../../utility/botUtil/Ownermiddleware');
 
     
 module.exports = async (context) => {
-await ownerMiddleware(context, async () => {
 
   const { 
     client, m, text, Owner, chatUpdate, store, isBotAdmin, isAdmin, IsGroup, 
@@ -36,5 +35,5 @@ await ownerMiddleware(context, async () => {
   } catch (err) {
     await m.reply("Error during eval execution:\n" + String(err));
   }
-                })
+                
 };
