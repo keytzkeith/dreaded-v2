@@ -19,7 +19,7 @@ module.exports = async (context) => {
                 return await m.reply(`✅ Anti-call is already ${value.toUpperCase()}.`);
             }
 
-            await db.updateSetting('anticall', action ? true : false);
+            await updateSetting('anticall', action ? true : false);
             await m.reply(`✅ Anti-call has been turned ${value.toUpperCase()}.`);
         } else {
             await m.reply(
