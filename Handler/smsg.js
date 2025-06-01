@@ -27,19 +27,8 @@ function smsg(conn, m, store) {
     m.chat = m.key.remoteJid;
     m.fromMe = m.key.fromMe;
     m.isGroup = m.chat.endsWith("@g.us");
-    let rawSender = (m.fromMe && conn.user.id) || m.participant || m.key.participant || m.chat || "";
-m.sender = rawSender;
-
-if (m.isGroup) {
-  try {
-    const metadata = conn.groupMetadata(m.chat);
-    const found = metadata.participants.find(p => p.id === rawSender);
-    if (found && found.pn) m.sender = found.pn;
-    if (m.key?.participant) m.participant = found?.pn || rawSender;
-  } catch (e) {
-    m.participant = rawSender;
-  }
-}
+    m.sender = conn.decodeJid((m.fromMe && conn.user.id) || m.participant || m.key.participant || m.chat || "");
+    if (m.isGroup) m.participant = conn.decodeJid(m.key.participant) || "";
   }
   if (m.message) {
     m.mtype = getContentType(m.message);
