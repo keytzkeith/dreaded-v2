@@ -96,6 +96,8 @@ const cmd = body.startsWith(prefix) && commands[resolvedCommandName] || commands
     const DevDreaded = Array.isArray(sudoUsers) ? sudoUsers : [];  
     const Owner = DevDreaded.map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender);  
 
+const sender = m.sender;
+
     const groupMetadata = m.isGroup ? await client.groupMetadata(m.chat).catch((e) => { }) : "";  
     const groupName = m.isGroup && groupMetadata ? await groupMetadata.subject : "";  
     const participants = m.isGroup && groupMetadata ? await groupMetadata.participants : "";  
