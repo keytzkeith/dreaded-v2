@@ -119,7 +119,7 @@ const sender = m.sender;
 const groupSender = m.isGroup && groupMetadata
   ? (() => {
       const found = groupMetadata.participants.find(p => 
-        p.id === sender || conn.decodeJid(p.id) === conn.decodeJid(sender)
+        p.id === sender || client.decodeJid(p.id) === client.decodeJid(sender)
       );
       return found?.pn || sender;
     })()
