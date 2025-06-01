@@ -18,7 +18,7 @@ const kali = readFileSync(filePath);
 
 
 
-async function smsg(conn, m, store) {
+function smsg(conn, m, store) {
   if (!m) return m;
   let M = proto.WebMessageInfo;
   if (m.key) {
@@ -32,7 +32,7 @@ m.sender = rawSender;
 
 if (m.isGroup) {
   try {
-    const metadata = await conn.groupMetadata(m.chat);
+    const metadata = conn.groupMetadata(m.chat);
     const found = metadata.participants.find(p => p.id === rawSender);
     if (found && found.pn) m.sender = found.pn;
     if (m.key?.participant) m.participant = found?.pn || rawSender;
