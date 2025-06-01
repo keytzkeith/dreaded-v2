@@ -1,5 +1,5 @@
 const ownerMiddleware = require('../../utility/botUtil/Ownermiddleware');
-const { getSettings, banUser, getBannedUsers, getSudoUsers } = require('../../Database/config');
+const { getSettings, banUser, getBannedUsers, getSudoUsers } = require('../../Database/adapter');
 
 module.exports = async (context) => {
     await ownerMiddleware(context, async () => {
