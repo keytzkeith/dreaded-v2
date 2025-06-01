@@ -116,8 +116,15 @@ const sender = m.sender;
  
    const isAdmin = m.isGroup ? groupAdmin.includes(m.sender) : false;  */
 
+const groupSender = m.isGroup && groupMetadata
+  ? (() => {
+      const found = groupMetadata.participants.find(p => p.id === m.sender || p.id === conn.decodeJid(m.sender));
+      return found?.pn ? found.pn + '@s.whatsapp.net' : m.sender;
+    })()
+  : m.sender;
 
-     const isAdmin = m.isGroup ? groupAdmin.includes(m.sender) : false;
+
+     const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
 
 
     const IsGroup = m.chat?.endsWith("@g.us");  
