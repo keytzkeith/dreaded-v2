@@ -9,7 +9,7 @@ module.exports = async (context) => {
     botNumber, itsMe, packname, author, generateProfilePicture, groupMetadata, 
     dreadedspeed, mycode, fetchJson, exec, getRandom, UploadFileUgu, TelegraPh, 
     prefix, cmd, botname, mode, gcpresence, antitag, antidelete, antionce, 
-    fetchBuffer, uploadtoimgur, ytmp3, getGroupAdmins, Tag
+    fetchBuffer, uploadtoimgur, groupSender, ytmp3, getGroupAdmins, Tag
   } = context;
 
   
