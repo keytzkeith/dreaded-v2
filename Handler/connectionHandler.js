@@ -34,37 +34,47 @@ const { autobio } = settings;
   }
 
   if (connection === "close") {
-    let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+  const statusCode = new Boom(lastDisconnect?.error)?.output?.statusCode;
 
-    switch (reason) {
-      case DisconnectReason.badSession:
-        console.log(`Bad Session File, Please Delete Session and Scan Again`);
-        process.exit();
-        break;
-      case DisconnectReason.connectionClosed:
-      case DisconnectReason.connectionLost:
-      case DisconnectReason.timedOut:
-        console.log("Connection lost, reconnecting...");
-        startDreaded();
-        break;
-      case DisconnectReason.connectionReplaced:
-        console.log("Connection Replaced, Please Restart Bot");
-        process.exit();
-        break;
-      case DisconnectReason.loggedOut:
-        console.log(`Logged Out, Please Delete Session and Scan Again.`);
-        process.exit();
-        break;
-      case DisconnectReason.restartRequired:
-        console.log("Restart Required, Restarting...");
-        startDreaded();
-        break;
-      default:
-        console.log(`Unknown disconnect reason: ${reason} | ${connection}`);
-        startDreaded();
-        break;
+  const reasonHandlers = {
+    [DisconnectReason.badSession]: () => {
+      console.log("❌ Bad Session File, Please Delete Session and Scan Again");
+      process.exit();
+    },
+    [DisconnectReason.connectionClosed]: () => {
+      console.log("🔌 Connection closed. Reconnecting...");
+      startDreaded();
+    },
+    [DisconnectReason.connectionLost]: () => {
+      console.log("📴 Connection lost. Reconnecting...");
+      startDreaded();
+    },
+    [DisconnectReason.timedOut]: () => {
+      console.log("⌛ Connection timed out. Reconnecting...");
+      startDreaded();
+    },
+    [DisconnectReason.connectionReplaced]: () => {
+      console.log("🔁 Connection replaced. Please restart bot.");
+      process.exit();
+    },
+    [DisconnectReason.loggedOut]: () => {
+      console.log("🔒 Logged out. Please delete session and scan again.");
+      process.exit();
+    },
+    [DisconnectReason.restartRequired]: () => {
+      console.log("♻️ Restart required. Restarting...");
+      startDreaded();
     }
+  };
+
+  const handleDisconnect = reasonHandlers[statusCode];
+  if (handleDisconnect) {
+    handleDisconnect();
+  } else {
+    console.log(`❓ Unknown disconnect reason: ${statusCode} | ${connection}`);
+    startDreaded();
   }
+}
 
   if (connection === "open") {
 
