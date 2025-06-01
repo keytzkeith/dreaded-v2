@@ -102,7 +102,7 @@ const cmd = body.startsWith(prefix) && commands[resolvedCommandName] || commands
     const groupAdmin = m.isGroup ? await getGroupAdmins(participants) : "";  
     const isBotAdmin = m.isGroup ? groupAdmin.includes(botNumber) : false; 
 
-const isAdmin = metadata.participants.some(p => p.id === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
+const isAdmin = groupMetadata.participants.some(p => p.id === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
  
    /* const isAdmin = m.isGroup ? groupAdmin.includes(m.sender) : false;  */
     const IsGroup = m.chat?.endsWith("@g.us");  
