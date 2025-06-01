@@ -85,7 +85,7 @@ const connectionHandler = async (client, update, startDreaded) => {
     const currentDevs = await getSudoUsers();
 
     if (!currentDevs.includes(Myself)) {
-      await db.addSudoUser(Myself);
+      await addSudoUser(Myself);
       let newSudoMessage = `Holla, ${getGreeting()},\n\nYou are connected to dreaded bot. 📡\n\n`;
       newSudoMessage += `👤 BOTNAME:- ${botname}\n`;
       newSudoMessage += `🔓 MODE:- ${settings.mode}\n`;
