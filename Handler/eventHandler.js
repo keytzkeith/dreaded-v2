@@ -1,4 +1,4 @@
-const { getGroupSetting, getSudoUsers } = require("../Database/config");
+const { getGroupSetting, getSudoUsers } = require("../Database/adapter");
 const botname = process.env.BOTNAME || 'DREADED';
 
 
