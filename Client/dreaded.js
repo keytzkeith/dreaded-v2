@@ -93,8 +93,8 @@ const cmd = body.startsWith(prefix) && commands[resolvedCommandName] || commands
 
 
 
-    const DevDreaded = Array.isArray(sudoUsers) ? sudoUsers : [];  
-    const Owner = DevDreaded.map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender);  
+    
+ 
 
 const sender = m.sender;
 
@@ -112,9 +112,6 @@ const sender = m.sender;
   : [];
     const isBotAdmin = m.isGroup ? groupAdmin.includes(botNumber) : false; 
 
-/* const isAdmin = groupMetadata.participants.some(p => p.id === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
- 
-   const isAdmin = m.isGroup ? groupAdmin.includes(m.sender) : false;  */
 
 const groupSender = m.isGroup && groupMetadata
   ? (() => {
@@ -131,6 +128,9 @@ const groupSender = m.isGroup && groupMetadata
 
     const IsGroup = m.chat?.endsWith("@g.us");  
 
+const DevDreaded = Array.isArray(sudoUsers) ? sudoUsers : [];
+const Owner = DevDreaded.map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(groupSender);
+
     const context = {  
         client, m, text, Owner, chatUpdate, store, isBotAdmin, isAdmin, IsGroup, participants,  
         pushname, body, budy, totalCommands, args, mime, qmsg, botNumber, itsMe,  
@@ -139,31 +139,28 @@ const groupSender = m.isGroup && groupMetadata
     };  
 
 
+
 if (cmd) {
-    
-    const senderNumber = m.sender.replace(/@s\.whatsapp\.net$/, '');
+    const senderNumber = groupSender.replace(/@s\.whatsapp\.net$/, '');
 
     if (bannedUsers.includes(senderNumber)) {
-        await client.sendMessage(m.chat, { text: "❗You are banned from using bot commands." }, { quoted: m });
+        await client.sendMessage(m.chat, {
+            text: "❗You are banned from using bot commands."
+        }, { quoted: m });
         return;
     }
 }
+
 
     if (cmd && mode === 'private' && !itsMe && !Owner && m.sender !== sudoUsers) {  
         return;  
     }  
 
-   /* if (await blocked_users(client, m, cmd)) {  
-        await m.reply("You are blocked from using bot commands.");  
-        return;  
-    }
-
-*/
 
 await antidel(client, m);  
     await status_saver(client, m, Owner, prefix);  
 
-    // await antilinkgc(client, m, isBotAdmin, isAdmin, Owner, body);  
+    
 
     await gcPresence(client, m);  
     await antitaggc(client, m, isBotAdmin, itsMe, isAdmin, Owner, body);  
