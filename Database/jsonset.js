@@ -10,22 +10,22 @@ function getDefaultStructure() {
             packname: "dreaded v2 🤖",
             mode: "public",
             presence: "online",
-            autoview: "true",
-            autolike: "true",
-            autoread: "true",
-            autobio: "false",
-            anticall: "true",
+            autoview: true,
+            autolike: true,
+            autoread: true,
+            autobio: false,
+            anticall: true,
             reactEmoji: "❤️"
         },
         groupDefaults: {
-            antitag: "true",
-            antidelete: "true",
-            gcpresence: "false",
-            antiforeign: "true",
-            antidemote: "false",
-            antipromote: "true",
-            events: "false",
-            antilink: "true"
+            antitag: true,
+            antidelete: true,
+            gcpresence: false,
+            antiforeign: true,
+            antidemote: false,
+            antipromote: true,
+            events: false,
+            antilink: true
         },
         groupSettings: {},
         bannedUsers: [],
@@ -69,7 +69,12 @@ async function getSettings() {
 
 async function updateSetting(key, value) {
     const data = readData();
-    data.globalSettings[key] = typeof value === 'boolean' ? value.toString() : value;
+
+    
+    if (value === 'true') value = true;
+    else if (value === 'false') value = false;
+
+    data.globalSettings[key] = value;
     writeData(data);
 }
 
@@ -85,10 +90,16 @@ async function getGroupSetting(jid) {
 
 async function updateGroupSetting(jid, key, value) {
     const data = readData();
+
     if (!data.groupSettings[jid]) {
         data.groupSettings[jid] = { ...data.groupDefaults };
     }
-    data.groupSettings[jid][key] = typeof value === 'boolean' ? value.toString() : value;
+
+    
+  if (value === 'true') value = true;
+    else if (value === 'false') value = false;
+
+    data.groupSettings[jid][key] = value;
     writeData(data);
 }
 
