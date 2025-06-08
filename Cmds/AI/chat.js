@@ -1,5 +1,5 @@
-const { saveConversation, getRecentMessages } = require('../../Database/config');
-const { deleteUserHistory } = require('../../Database/config'); 
+const { saveConversation, getRecentMessages } = require('../../Database/adapter');
+const { deleteUserHistory } = require('../../Database/adapter'); 
 
 module.exports = async (context) => {
     const { client, m, text, botname, fetchJson, prefix } = context;
