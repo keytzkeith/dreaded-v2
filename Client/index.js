@@ -65,12 +65,25 @@ const connectionHandler = require('../Handler/connectionHandler');
 
 // const connectionEvents = require("./connectionEvents.js");
 
+let cachedSettings = null;
+let lastSettingsFetch = 0;
+const SETTINGS_CACHE_DURATION = 10_000;
+
+async function getCachedSettings() {
+  const now = Date.now();
+  if (!cachedSettings || now - lastSettingsFetch > SETTINGS_CACHE_DURATION) {
+    cachedSettings = await getSettings();
+    lastSettingsFetch = now;
+  }
+  return cachedSettings;
+}
+
 async function startDreaded() {
 
-let settingss = await getSettings();
+let settings = await getCachedSettings();
         if (!settingss) return;
 
-const { autobio, mode, anticall } = settingss;
+const { autobio, mode, anticall } = settings;
 
 
         
@@ -115,9 +128,8 @@ fireInitQueries: false,
 const processedCalls = new Set();
 
 client.ws.on('CB:call', async (json) => {
-    const settingszs = await getSettings();
-    if (!settingszs?.anticall) return;
-
+    const settings = await getCachedSettings();
+  if (!settings?.anticall) return;
     const callId = json.content[0].attrs['call-id'];
     const callerJid = json.content[0].attrs['call-creator'];
     const callerNumber = callerJid.replace(/[@.a-z]/g, "");
@@ -142,8 +154,9 @@ client.ws.on('CB:call', async (json) => {
 
 
 client.ev.on("messages.upsert", async (chatUpdate) => {
-    let settings = await getSettings();
-    if (!settings) return;
+    const settings = await getCachedSettings(); 
+  if (!settings) return;
+
 
     const { autoread, autolike, autoview, presence, reactEmoji } = settings;
 
