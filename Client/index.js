@@ -81,7 +81,7 @@ async function getCachedSettings() {
 async function startDreaded() {
 
 let settings = await getCachedSettings();
-        if (!settingss) return;
+        if (!settings) return;
 
 const { autobio, mode, anticall } = settings;
 
