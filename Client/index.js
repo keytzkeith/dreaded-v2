@@ -25,6 +25,7 @@ const _ = require("lodash");
 const PhoneNumber = require("awesome-phonenumber");
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif');
  const { isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/botFunctions');
+const handleDreaded = require("./dreaded");
 
 const logger = pino({
     level: 'silent' 
@@ -222,8 +223,9 @@ client.ev.on("messages.upsert", async (chatUpdate) => {
         // handle commands
         if (!client.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
 
-        m = smsg(client, mek, store);
-        require("./dreaded")(client, m, chatUpdate, store);
+const m = smsg(client, mek, store);
+handleDreaded(client, m, chatUpdate, store);
+
     } catch (err) {
         console.log(err);
     }
