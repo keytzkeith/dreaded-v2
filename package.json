@@ -44,7 +44,6 @@
     "node-webpmux": "^3.1.5",
     "performance-now": "^2.1.0",
     "pg": "^8.13.3",
-    "pg-hstore": "^2.3.4",
     "pino": "^7.0.5",
     "tempmail.lol": "^4.1.0",
     "wa-sticker-formatter": "^4.3.2",
