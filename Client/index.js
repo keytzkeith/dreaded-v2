@@ -172,16 +172,6 @@ client.ev.on("connection.update", async (update) => {
 
     client.ev.on("messages.upsert", async (chatUpdate) => {
 
-const botNumber = client.decodeJid(client.user.id);
-const {
-  groupMetadata,
-  groupName,
-  participants,
-  groupAdmin,
-  isBotAdmin,
-  groupSender,
-  isAdmin
-} = await client.getGroupContext(botNumber);
         const settings = await getCachedSettings(); 
         if (!settings) return;
 
@@ -203,10 +193,10 @@ const {
 
                 if ((antilink === true || antilink === 'true') && messageContent.includes("https") && groupSender !== Myself) {
                 
-                  /*  const groupAdmins = await client.getGroupAdmins(mek.key.remoteJid);
+                   const groupAdmins = await client.getGroupAdmins(mek.key.remoteJid);
                     const isAdmin = groupAdmins.includes(sender);
                     const isBotAdmin = groupAdmins.includes(Myself);
-*/
+
                     if (!isBotAdmin) return;
                     if (!isAdmin) {
                         await client.sendMessage(mek.key.remoteJid, {
