@@ -40,11 +40,7 @@ const store = makeInMemoryStore({
     })
 });
 
-const groupCache = new NodeCache({
-    stdTTL: 5 * 60, 
-    useClones: false,
-    checkperiod: 60 
-});
+const groupCache = require("../Client/groupCache");
 
 const authenticationn = require('../Auth/auth.js');
 const { smsg } = require('../Handler/smsg');
@@ -123,7 +119,7 @@ async function startDreaded() {
     setInterval(() => { store.writeToFile("store.json"); }, 3000);
 
 client.ev.on("connection.update", async (update) => {
-  await connectionHandler(client, update, startDreaded, groupCache);
+  await connectionHandler(client, update, startDreaded);
 }); 
 
     
