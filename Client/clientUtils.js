@@ -4,6 +4,8 @@ const { downloadContentFromMessage, jidDecode } = require("@whiskeysockets/baile
 const fs = require("fs");
 const FileType = require("file-type");
 const PhoneNumber = require("awesome-phonenumber");
+const groupCache = require("../Client/groupCache");
+
 
 /**
  * Initialize client utility functions
@@ -11,7 +13,7 @@ const PhoneNumber = require("awesome-phonenumber");
  * @param {Object} store - Store instance
  * @param {Object} groupCache - NodeCache instance for group metadata
  */
-function initializeClientUtils(client, store, groupCache) {
+function initializeClientUtils(client, store) {
   
   /**
    * Decode JID to proper format
