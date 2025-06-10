@@ -120,7 +120,11 @@ async function startDreaded() {
 
     store.bind(client.ev);
 
-    setInterval(() => { store.writeToFile("store.json"); }, 3000); 
+    setInterval(() => { store.writeToFile("store.json"); }, 3000);
+
+client.ev.on("connection.update", async (update) => {
+  await connectionHandler(client, update, startDreaded);
+}); 
 
     
     client.ev.on('groups.update', async (updates) => {
