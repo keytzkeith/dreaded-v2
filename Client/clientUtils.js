@@ -261,6 +261,76 @@ function initializeClientUtils(client, store, groupCache) {
     }
   };
 
+
+/**
+   * Get full group context with caching and sender info
+   * @param {Object} m - Message object
+   * @param {string} botNumber - The bot's JID/phone number
+   * @returns {Promise<Object>} Group context
+   */
+  client.getGroupContext = async (m, botNumber) => {
+    if (!m.isGroup) {
+      return {
+        groupMetadata: null,
+        groupName: "",
+        participants: [],
+        groupAdmin: [],
+        isBotAdmin: false,
+        groupSender: m.sender,
+        isAdmin: false,
+      };
+    }
+
+    try {
+      let groupMetadata = groupCache.get(m.chat);
+      if (!groupMetadata) {
+        groupMetadata = await client.groupMetadata(m.chat);
+        groupCache.set(m.chat, groupMetadata);
+      }
+
+      const groupName = groupMetadata.subject || "";
+
+      const participants = groupMetadata.participants
+        .filter(p => p.pn)
+        .map(p => p.pn);
+
+      const groupAdmin = groupMetadata.participants
+        .filter(p => p.admin && p.pn)
+        .map(p => p.pn);
+
+      const senderJid = client.decodeJid(m.sender);
+      const found = groupMetadata.participants.find(p =>
+        client.decodeJid(p.id) === senderJid
+      );
+      const groupSender = found?.pn || m.sender;
+
+      const isBotAdmin = groupAdmin.includes(botNumber);
+      const isAdmin = groupAdmin.includes(groupSender);
+
+      return {
+        groupMetadata,
+        groupName,
+        participants,
+        groupAdmin,
+        isBotAdmin,
+        groupSender,
+        isAdmin
+      };
+
+    } catch (error) {
+      console.error("Error getting group context:", error);
+      return {
+        groupMetadata: null,
+        groupName: "",
+        participants: [],
+        groupAdmin: [],
+        isBotAdmin: false,
+        groupSender: m.sender,
+        isAdmin: false,
+      };
+    }
+  };
+
   console.log('Client utility functions initialized successfully');
 }
 
