@@ -6,17 +6,15 @@ const {
 } = require("@whiskeysockets/baileys");
 
 const { database, botname } = require("../Env/settings");
-
-
 const { getSettings, addSudoUser, getSudoUsers } = require("../Database/adapter");
-
 const { commands, totalCommands } = require("../Handler/commandHandler");
 
-const connectionHandler = async (client, update, startDreaded) => {
+const connectionHandler = async (client, update, startDreaded, groupCache = null) => {
   const { connection, lastDisconnect } = update;
 
-const settings = await getSettings();
-const { autobio } = settings;
+  const settings = await getSettings();
+  const { autobio } = settings;
+  
   const getGreeting = () => {
     const currentHour = DateTime.now().setZone("Africa/Nairobi").hour;
     if (currentHour >= 5 && currentHour < 12) return "Good morning 🌄";
@@ -34,50 +32,55 @@ const { autobio } = settings;
   }
 
   if (connection === "close") {
-  const statusCode = new Boom(lastDisconnect?.error)?.output?.statusCode;
+    const statusCode = new Boom(lastDisconnect?.error)?.output?.statusCode;
 
-  const reasonHandlers = {
-    [DisconnectReason.badSession]: () => {
-      console.log("❌ Bad Session File, Please Delete Session and Scan Again");
-      process.exit();
-    },
-    [DisconnectReason.connectionClosed]: () => {
-      console.log("🔌 Connection closed. Reconnecting...");
-      startDreaded();
-    },
-    [DisconnectReason.connectionLost]: () => {
-      console.log("📴 Connection lost. Reconnecting...");
-      startDreaded();
-    },
-    [DisconnectReason.timedOut]: () => {
-      console.log("⌛ Connection timed out. Reconnecting...");
-      startDreaded();
-    },
-    [DisconnectReason.connectionReplaced]: () => {
-      console.log("🔁 Connection replaced. Please restart bot.");
-      process.exit();
-    },
-    [DisconnectReason.loggedOut]: () => {
-      console.log("🔒 Logged out. Please delete session and scan again.");
-      process.exit();
-    },
-    [DisconnectReason.restartRequired]: () => {
-      console.log("♻️ Restart required. Restarting...");
+    
+    if (groupCache) {
+      groupCache.flushAll();
+      console.log("🗑️ Group cache cleared due to connection close");
+    }
+
+    const reasonHandlers = {
+      [DisconnectReason.badSession]: () => {
+        console.log("❌ Bad Session File, Please Delete Session and Scan Again");
+        process.exit();
+      },
+      [DisconnectReason.connectionClosed]: () => {
+        console.log("🔌 Connection closed. Reconnecting...");
+        startDreaded();
+      },
+      [DisconnectReason.connectionLost]: () => {
+        console.log("📴 Connection lost. Reconnecting...");
+        startDreaded();
+      },
+      [DisconnectReason.timedOut]: () => {
+        console.log("⌛ Connection timed out. Reconnecting...");
+        startDreaded();
+      },
+      [DisconnectReason.connectionReplaced]: () => {
+        console.log("🔁 Connection replaced. Please restart bot.");
+        process.exit();
+      },
+      [DisconnectReason.loggedOut]: () => {
+        console.log("🔒 Logged out. Please delete session and scan again.");
+        process.exit();
+      },
+      [DisconnectReason.restartRequired]: () => {
+        console.log("♻️ Restart required. Restarting...");
+        startDreaded();
+      }
+    };
+
+    const handleDisconnect = reasonHandlers[statusCode];
+    if (handleDisconnect) {
+      handleDisconnect();
+    } else {
+      console.log(`❓ Unknown disconnect reason: ${statusCode} | ${connection}`);
       startDreaded();
     }
-  };
-
-  const handleDisconnect = reasonHandlers[statusCode];
-  if (handleDisconnect) {
-    handleDisconnect();
-  } else {
-    console.log(`❓ Unknown disconnect reason: ${statusCode} | ${connection}`);
-    startDreaded();
   }
-}
 
   if (connection === "open") {
-
     if (database) {
       console.log("📈 Connecting to PostgreSQL database...");
       try {
@@ -90,12 +93,26 @@ const { autobio } = settings;
       console.log("📦 Using JSON settings database (no PostgreSQL URL found).");
     }
 
-
-   
     await client.groupAcceptInvite("HPik6o5GenqDBCosvXW3oe");
 
-    const Myself = client.user.id.replace(/:.*/, "").split("@")[0];
     
+    if (groupCache) {
+      try {
+        console.log("🗂️ Caching group metadata...");
+        const groups = await client.groupFetchAllParticipating();
+        console.log(`📋 Found ${Object.keys(groups).length} groups to cache...`);
+        
+        for (const [jid, groupInfo] of Object.entries(groups)) {
+          groupCache.set(jid, groupInfo);
+        }
+        
+        console.log(`✅ Successfully cached metadata for ${Object.keys(groups).length} groups`);
+      } catch (error) {
+        console.error("❌ Error caching group metadata on connection open:", error);
+      }
+    }
+
+    const Myself = client.user.id.replace(/:.*/, "").split("@")[0];
     const currentDevs = await getSudoUsers();
 
     if (!currentDevs.includes(Myself)) {
