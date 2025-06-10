@@ -8,8 +8,9 @@ const {
 const { database, botname } = require("../Env/settings");
 const { getSettings, addSudoUser, getSudoUsers } = require("../Database/adapter");
 const { commands, totalCommands } = require("../Handler/commandHandler");
+const groupCache = require("../Client/groupCache");
 
-const connectionHandler = async (client, update, startDreaded, groupCache = null) => {
+const connectionHandler = async (client, update, startDreaded) => {
   const { connection, lastDisconnect } = update;
 
   const settings = await getSettings();
