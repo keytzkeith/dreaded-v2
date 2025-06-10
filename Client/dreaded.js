@@ -26,6 +26,8 @@ module.exports = dreaded = async (client, m, chatUpdate, store) => {
 
 try {
 
+const botNumber = await client.decodeJid(client.user.id);  
+
 const { initializeClientUtils } = require("../Client/clientUtils");
 initializeClientUtils(client, store);
 
@@ -81,7 +83,7 @@ const cmd = body.startsWith(prefix) && commands[resolvedCommandName] || commands
  
     const args = body.trim().split(/ +/).slice(1);  
     const pushname = m.pushName || "No Name";  
-    const botNumber = await client.decodeJid(client.user.id);  
+    
     const itsMe = m.sender == botNumber ? true : false;  
     let text = (q = args.join(" "));  
     const arg = budy.trim().substring(budy.indexOf(" ") + 1);  
