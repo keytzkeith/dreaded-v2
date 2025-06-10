@@ -27,7 +27,7 @@ module.exports = dreaded = async (client, m, chatUpdate, store) => {
 try {
 
 const { initializeClientUtils } = require("../Client/clientUtils");
-initializeClientUtils(client, store, groupCache);
+initializeClientUtils(client, store);
 
 const {
   groupMetadata,
