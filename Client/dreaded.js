@@ -26,6 +26,19 @@ module.exports = dreaded = async (client, m, chatUpdate, store) => {
 
 try {
 
+const { initializeClientUtils } = require("../Client/clientUtils");
+initializeClientUtils(client, store, groupCache);
+
+const {
+  groupMetadata,
+  groupName,
+  participants,
+  groupAdmin,
+  isBotAdmin,
+  groupSender,
+  isAdmin
+} = await client.getGroupContext(m, botNumber);
+
 const sudoUsers = await getSudoUsers();
 const bannedUsers = await getBannedUsers();
 
@@ -98,34 +111,7 @@ const cmd = body.startsWith(prefix) && commands[resolvedCommandName] || commands
 
 const sender = m.sender;
 
-    const groupMetadata = m.isGroup ? await client.groupMetadata(m.chat).catch((e) => { }) : "";  
-    const groupName = m.isGroup && groupMetadata ? await groupMetadata.subject : "";  
-    const participants = m.isGroup && groupMetadata
-  ? groupMetadata.participants
-      .filter(p => p.pn)
-      .map(p => p.pn)
-  : [];
-    const groupAdmin = m.isGroup
-  ? groupMetadata.participants
-      .filter(p => p.admin && p.pn)
-      .map(p => p.pn)
-  : [];
-    const isBotAdmin = m.isGroup ? groupAdmin.includes(botNumber) : false; 
-
-
-const groupSender = m.isGroup && groupMetadata
-  ? (() => {
-      const found = groupMetadata.participants.find(p => 
-        p.id === sender || client.decodeJid(p.id) === client.decodeJid(sender)
-      );
-      return found?.pn || sender;
-    })()
-  : sender;
-
-
-     const isAdmin = m.isGroup ? groupAdmin.includes(groupSender) : false;
-
-
+    
     const IsGroup = m.chat?.endsWith("@g.us");  
 
 const DevDreaded = Array.isArray(sudoUsers) ? sudoUsers : [];
