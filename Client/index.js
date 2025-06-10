@@ -171,6 +171,17 @@ client.ev.on("connection.update", async (update) => {
     });
 
     client.ev.on("messages.upsert", async (chatUpdate) => {
+
+const botNumber = client.decodeJid(client.user.id);
+const {
+  groupMetadata,
+  groupName,
+  participants,
+  groupAdmin,
+  isBotAdmin,
+  groupSender,
+  isAdmin
+} = await client.getGroupContext(m, botNumber);
         const settings = await getCachedSettings(); 
         if (!settings) return;
 
@@ -190,27 +201,27 @@ client.ev.on("connection.update", async (update) => {
             if (isGroup) {
                 const antilink = await getGroupSetting(mek.key.remoteJid, "antilink");
 
-                if ((antilink === true || antilink === 'true') && messageContent.includes("https") && sender !== Myself) {
+                if ((antilink === true || antilink === 'true') && messageContent.includes("https") && groupSender !== Myself) {
                 
-                    const groupAdmins = await client.getGroupAdmins(mek.key.remoteJid);
+                  /*  const groupAdmins = await client.getGroupAdmins(mek.key.remoteJid);
                     const isAdmin = groupAdmins.includes(sender);
                     const isBotAdmin = groupAdmins.includes(Myself);
-
+*/
                     if (!isBotAdmin) return;
                     if (!isAdmin) {
                         await client.sendMessage(mek.key.remoteJid, {
-                            text: `🚫 @${sender.split("@")[0]}, sending links is prohibited! You have been removed.`,
+                            text: `🚫 @${groupSender.split("@")[0]}, sending links is prohibited! You have been removed.`,
                             contextInfo: { mentionedJid: [sender] }
                         }, { quoted: mek });
 
-                        await client.groupParticipantsUpdate(mek.key.remoteJid, [sender], "remove");
+                        await client.groupParticipantsUpdate(mek.key.remoteJid, [groupSender], "remove");
 
                         await client.sendMessage(mek.key.remoteJid, {
                             delete: {
                                 remoteJid: mek.key.remoteJid,
                                 fromMe: false,
                                 id: mek.key.id,
-                                participant: sender
+                                participant: groupSender
                             }
                         });
                     }
