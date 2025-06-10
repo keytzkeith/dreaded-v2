@@ -127,18 +127,7 @@ client.ev.on("connection.update", async (update) => {
 }); 
 
     
-    client.ev.on('groups.update', async (updates) => {
-        for (const update of updates) {
-            try {
-                console.log(`Group updated: ${update.id}`);
-                const metadata = await client.groupMetadata(update.id);
-                groupCache.set(update.id, metadata);
-                console.log(`Cached metadata for group: ${update.id}`);
-            } catch (error) {
-                console.error(`Error caching group metadata for ${update.id}:`, error);
-            }
-        }
-    });
+    
 
     client.ev.on('group-participants.update', async (event) => {
         try {
