@@ -181,7 +181,7 @@ const {
   isBotAdmin,
   groupSender,
   isAdmin
-} = await client.getGroupContext(m, botNumber);
+} = await client.getGroupContext(botNumber);
         const settings = await getCachedSettings(); 
         if (!settings) return;
 
