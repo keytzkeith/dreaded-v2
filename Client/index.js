@@ -123,7 +123,7 @@ async function startDreaded() {
     setInterval(() => { store.writeToFile("store.json"); }, 3000);
 
 client.ev.on("connection.update", async (update) => {
-  await connectionHandler(client, update, startDreaded);
+  await connectionHandler(client, update, startDreaded, groupCache);
 }); 
 
     
