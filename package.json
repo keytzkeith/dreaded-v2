@@ -26,6 +26,7 @@
     "@whiskeysockets/baileys": "git+https://github.com/Fortunatusmokaya/Baileys.git",
     "acrcloud": "^1.4.0",
     "axios": "^1.3.6",
+    "awesome-phonenumber": "^3.6.0",
     "badadvice": "^1.0.0",
     "canvacord": "^5.4.9",
     "cheerio": "^1.0.0-rc.10",
