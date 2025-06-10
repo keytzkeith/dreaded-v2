@@ -333,7 +333,7 @@ function initializeClientUtils(client, store) {
     }
   };
 
-  console.log('Client utility functions initialized successfully');
+ // console.log('Client utility functions initialized successfully');
 }
 
 module.exports = {
