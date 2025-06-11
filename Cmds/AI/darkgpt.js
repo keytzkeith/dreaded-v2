@@ -1,27 +1,23 @@
 module.exports = async (context) => {
     const { client, m, text } = context;
 
+    try {
+        if (!text) {
+            return m.reply("I am darkgpt, I can respond to anything — even the darkest thoughts. What do you want ?");
+        }
 
-try {
+        const msg = encodeURIComponent(text);
+        const response = await fetch(`http://darkgpt.dreaded.site:3800/api/venice?text=${msg}`);
 
-if (!text) return m.reply("I am darkgpt for dreaded, I can respond to anything be it harmful. This API is borrowed from GURU BOT");
+        const result = await response.json();
 
-    const msg = encodeURIComponent(text);
-     const data = await fetch(`https://dark.guruapi.tech/egpt?prompt=${msg}`);
+        if (!result.response) {
+            return m.reply('I did not get any result');
+        }
 
-    
-    const msgg = await data.json();
+        await m.reply(result.response);
 
-    if (!msgg.message) return m.reply('I did not get any result');
-
-    const final = msgg.message;
-
-await m.reply(final)
-
-} catch (e) {
-
-m.reply('An error occured while communicating with the APIs\n' + e);
-
-}
-
-}
+    } catch (e) {
+        m.reply('An error occurred while communicating with the Venice API:\n' + e);
+    }
+};
