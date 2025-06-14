@@ -71,12 +71,12 @@ await client.query(`
             prefix: '.',
             packname: 'dreaded md2 🤖',
             mode: 'public',
-            presence: 'online',
+            presence: 'typing',
             autoview: 'true',
             autolike: 'true',
-            autoread: 'true',
+            autoread: 'false',
             autobio: 'false',
-            anticall: 'true', 
+            anticall: 'false', 
             reactEmoji: '❤️'  
         };
 
