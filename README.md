@@ -35,10 +35,17 @@
 ## DEPLOYMENT
 
 <p align="center">
+  🚀 If you're unable to deploy to Heroku, you can use our custom hosting platform <a href="https://hosting.dreaded.site" target="_blank"><strong>HERE</strong></a>.
+</p>
+
+---
+
+<p align="center">
   <a href="https://dashboard.heroku.com/new?template=https://github.com/Fortunatusmokaya/dreaded-v2" target="_blank" style="margin-right: 10px;">
-    <img alt="Deploy" src="https://www.herokucdn.com/deploy/button.svg"/>
+    <img alt="Deploy to Heroku" src="https://www.herokucdn.com/deploy/button.svg"/>
   </a>
 </p>
+
 <p align="center">
   Heroku safety 💯 guaranteed.
 </p>
