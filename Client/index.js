@@ -220,13 +220,16 @@ client.ev.on("connection.update", async (update) => {
             }
 
             // autolike for statuses
-            if (autolike && mek.key.remoteJid === "status@broadcast") {
-                if (!mek.status) {
-                    await client.sendMessage(mek.key.remoteJid, {
-                        react: { key: mek.key, text: reactEmoji }
-                    });
-                }
-            }
+            
+
+if (autolike && mek.key && mek.key.remoteJid === "status@broadcast") {
+        const nickk = await client.decodeJid(client.user.id);
+        const emojis = ['🗿', '⌚️', '💠', '👣', '🍆', '💔', '🤍', '❤️‍🔥', '💣', '🧠', '🦅', '🌻', '🧊', '🛑', '🧸', '👑', '📍', '😅', '🎭', '🎉', '😳', '💯', '🔥', '💫', '🐒', '💗', '❤️‍🔥', '👁️', '👀', '🙌', '🙆', '🌟', '💧', '🦄', '🟢', '🎎', '✅', '🥱', '🌚', '💚', '💕', '😉', '😒'];
+        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        await client.sendMessage(mek.key.remoteJid, { react: { text: randomEmoji, key: mek.key, } }, { statusJidList: [mek.key.participant, nickk] });
+       
+   console.log('Reaction sent successfully✅️');
+          }
 
             // autoview/ autoread
             if (autoview && mek.key.remoteJid === "status@broadcast") {
