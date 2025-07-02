@@ -5,59 +5,61 @@
 | [![Fortunatus Mokaya](https://github.com/Fortunatusmokaya.png?lenght=50width=50)](https://github.com/Fortunatusmokaya)|
 |----|
 
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&size=30&pause=1000&color=0000FF&center=true&vCenter=true&width=500&height=60&lines=HOLLA+WELCOME+TO+THIS+REPO!)](https://git.io/typing-svg)
-
-   [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F33A6A&lines=FORK+AND+MAYBE+GIVE+US+A+STAR)](https://git.io/typing-svg)
-
----
-
-> [CAUTION]
-
-> This bot is not created nor endorsed by WhatsApp. Your account might be banned. Be careful not to cause spam.
-
----
+<p align="center">
+<a href="https://github.com/Fortunatusmokaya"><img title="Author" src="https://img.shields.io/badge/Fortunatus-skyblue?style=for-the-badge&logo=telegram"></a>
+<p/>
+<p align="center">
+<a href="https://github.com/Fortunatusmokaya/dreaded-v2/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Fortunatusmokaya/dreaded-v2?&style=social"></a>
+<a href="https://github.com/Fortunatusmokaya/dreaded-v2/network/members"><img title="Fork" src="https://img.shields.io/github/forks/Fortunatusmokaya/dreaded-v2?style=social"></a>
+<a href="https://github.com/Fortunatusmokaya/dreaded-v2/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/Fortunatusmokaya/dreaded-v2?label=Watching&style=social"></a>
+</p>
 
 
-## FEATURES
-`This bot is a modification of the predecessor ***`dreaded-md`*** but we changed the module to commonJs. It has group management features, some media commands, image manipulation commands as well as AI and many other features incorporated.`
 
- `Some AI and media commands use our API. This API is not very reliable hence sometimes there may be a downtime.`
-
- `If you are a developer you can check out our`  [`API SITE`](https://api.dreaded.site).
-
- `The API site contains many endpoints that can be used in your projects. No need for API keys or login, completely free, for now`
 
 ## SET-UP
 
-## Fork
 
 <h2 align="center">   
 
-- ***You MUST `fork` this repo before fetching pairing code. Fork this repo by tapping  [`here`](https://github.com/Fortunatusmokaya/dreaded-v2/fork)***
+
+<p align="center">
+  <a href='https://github.com/Fortunatusmokaya/dreaded-v2/fork' target="_blank" style="margin-right: 10px;">
+    <img alt='Fork Repo' src='https://img.shields.io/badge/Fork Repo-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=orange&color=darkgreen'/>
+  </a>
+  <a href='https://pair.dreaded.site' target="_blank">
+    <img alt='REQUEST PAIR CODE' src='https://img.shields.io/badge/Get_Pair_code-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=darkorange&color=darkorange'/>
+  </a>
+</p>
+
+## DEPLOYMENT
+
+<p align="center">
+  🚀 If you're unable to deploy to Heroku, you can use our custom hosting platform <a href="https://hosting.dreaded.site" target="_blank"><strong>HERE</strong></a>.
+</p>
+
+---
+
+<p align="center">
+  <a href="https://dashboard.heroku.com/new?template=https://github.com/Fortunatusmokaya/dreaded-v2" target="_blank" style="margin-right: 10px;">
+    <img alt="Deploy to Heroku" src="https://www.herokucdn.com/deploy/button.svg"/>
+  </a>
+</p>
+
+<p align="center">
+  Heroku safety 💯 guaranteed.
+</p>
 
 
-## Pairing:
+<details>
+<summary>MANUAL INSTALLATION</summary>
 
-
-- ***`Get your Session Id` by  [`PAIRING CODE HERE`](https://pair.dreaded.site). `or` [`HERE`](https://pair.dreaded.site).***
-
-
-
-- Then `Go-to WhatsApp > Three dots > Linked Devices`
-   - You will get a session ID in your WhatsApp. Copy it.
-
-## Heroku Setup:
-
-   - ***[`CREATE HEROKU ACCOUNT`](https://signup.heroku.com/) `if you don't have one.`***
-
-
-- ***Now [`DEPLOY TO HEROKU`](https://dashboard.heroku.com/new?template=https://github.com/Fortunatusmokaya/dreaded-v2).***
-
--***`Fill in all the required variables and deploy the bot.`***
-
--***`If you plan to host the bot in your server, vps, locally or panel you can carefully edit the file settings.js and add the session id in the session constant (if you know what that is), or you can still autheticate with qr`***
-
+## `REQUIREMENTS`
+* [Node.js](https://nodejs.org/en/)
+* [Git](https://git-scm.com/downloads)
+* [FFmpeg](https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2020-12-08-13-03/ffmpeg-n4.3.1-26-gca55240b8c-win64-gpl-4.3.zip)
+* [Libwebp](https://developers.google.com/speed/webp/download)
+* Any text editor
 
 
 ## FOR TERMUX/UBUNTU/SSH VPS DEPLOY
@@ -92,6 +94,16 @@ pm2 start index.js
 
 _CTRL + C_
 
+</details>
+
+## FEATURES
+`This bot is a modification of the predecessor ***`dreaded-md`*** but we changed the module to commonJs. It has group management features, some media commands, image manipulation commands as well as AI and many other features incorporated.`
+
+ `Some AI and media commands use our API. This API is not very reliable hence sometimes there may be a downtime.`
+
+ `If you are a developer you can check out our`  [`API SITE`](https://api.dreaded.site).
+
+ `The API site contains many endpoints that can be used in your projects. No need for API keys or login, completely free, for now`
 
 
 
@@ -119,22 +131,10 @@ Thanks to...
 
 ---
 
-***Tap the WhatsApp logo below to join our channel and group for updates***
-
-<p align="left">
-  <a aria-label="Join our channel for updates" href="https://whatsapp.com/channel/0029VaeZVGaFsn0Yr8xSAM35" target="_blank">
-    <img alt="whatsapp" src="https://img.shields.io/badge/CHANNEL-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-  </a>
-
-<p align="left">
-  <a aria-label="Join our channel for updates" href="https://chat.whatsapp.com/HPik6o5GenqDBCosvXW3oe" target="_blank">
-    <img alt="whatsapp" src="https://img.shields.io/badge/WA GROUP-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
-  </a>
-
 
 Incase of any issues, contact me  [here](https://wa.me/+254114018035) via WhatsApp.
 
-Modifying the bot structure is at your own risk. We won't offer technical support if error occur.
+Modifying the bot structure is at your own risk. We won't offer technical support if error occur, also use bots on WhatsApp at your own risk, you may be flagged for spam.
 
 
 ## License
